@@ -17,7 +17,7 @@ public class CandidateEntity {
     private UUID id;
     private String name;
 
-    @Pattern(regexp = "\\s+", message = "name should not have blank spaces")
+//    @Pattern(regexp = "\\s+", message = "name should not have blank spaces")
     private String username;
 
     @Email(message = "email not valid")
@@ -53,11 +53,11 @@ public class CandidateEntity {
         this.name = name;
     }
 
-    public @Pattern(regexp = "\\s+", message = "name should not have blank spaces") String getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(@Pattern(regexp = "\\s+", message = "name should not have blank spaces") String username) {
+    public void setUsername (String username) {
         this.username = username;
     }
 
