@@ -1,6 +1,7 @@
 package com.br.spring.modules.candidate.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,12 +13,14 @@ import java.util.UUID;
 
 @Entity(name = "candidate")
 public class CandidateEntity {
+    @Valid
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
 
-//    @Pattern(regexp = "\\s+", message = "name should not have blank spaces")
+    @Pattern(regexp = "\\s+", message = "name should not have blank spaces")
     private String username;
 
     @Email(message = "email not valid")

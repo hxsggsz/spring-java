@@ -1,4 +1,4 @@
-package com.br.spring.modules.candidate.exceptions;
+package com.br.spring.shared.dtos;
 
 public class ErrorMessageDTO {
     private String message;
