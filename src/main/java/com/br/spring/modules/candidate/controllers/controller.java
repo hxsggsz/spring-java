@@ -1,7 +1,7 @@
 package com.br.spring.modules.candidate.controllers;
 
 
-import com.br.spring.modules.candidate.entities.CandidateEntity;
+import com.br.spring.modules.candidate.dto.CreateCandidateDTO;
 import com.br.spring.modules.candidate.useCases.CreateCandidateUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class controller {
     CreateCandidateUseCase createCandidateUseCase;
 
     @PostMapping("/")
-    public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidate) {
+    public ResponseEntity<Object> create(@Valid @RequestBody CreateCandidateDTO candidate) {
         try {
         var result = this.createCandidateUseCase.execute(candidate);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);

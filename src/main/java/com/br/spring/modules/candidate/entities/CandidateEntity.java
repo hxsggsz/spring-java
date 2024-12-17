@@ -1,5 +1,6 @@
 package com.br.spring.modules.candidate.entities;
 
+import com.br.spring.modules.candidate.dto.CreateCandidateDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -20,7 +22,6 @@ public class CandidateEntity {
     private UUID id;
     private String name;
 
-    @Pattern(regexp = "\\s+", message = "name should not have blank spaces")
     private String username;
 
     @Email(message = "email not valid")
@@ -39,6 +40,13 @@ public class CandidateEntity {
 
     @Length(min = 8, max = 255, message = "description not valid")
     private String description;
+
+    public CandidateEntity(CreateCandidateDTO candidate) {
+        BeanUtils.copyProperties(candidate, this);
+    }
+
+    public CandidateEntity() {
+    }
 
     public UUID getId() {
         return id;
