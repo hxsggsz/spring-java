@@ -1,25 +1,24 @@
-package com.br.spring.modules.candidate.entities;
+package com.br.spring.modules.company.entities;
 
 import com.br.spring.modules.candidate.dto.CreateCandidateDTO;
+import com.br.spring.modules.company.dtos.CreateCompanyDTO;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity(name = "candidate")
-public class CandidateEntity {
+@Entity(name = "company")
+public class CompanyEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String name;
-
     private String username;
 
     @Email(message = "email not valid")
@@ -27,6 +26,12 @@ public class CandidateEntity {
 
     @Length(min = 8, max = 255, message = "password not valid")
     private String password;
+
+    @Length(min = 8, max = 255, message = "description not valid")
+    private String description;
+
+    @URL(message = "website should be a valid url")
+    private String website;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -36,14 +41,11 @@ public class CandidateEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Length(min = 8, max = 255, message = "description not valid")
-    private String description;
-
-    public CandidateEntity(CreateCandidateDTO candidate) {
-        BeanUtils.copyProperties(candidate, this);
+    public CompanyEntity(CreateCompanyDTO company) {
+        BeanUtils.copyProperties(company, this);
     }
 
-    public CandidateEntity() {
+    public CompanyEntity() {
     }
 
     public UUID getId() {
@@ -54,44 +56,44 @@ public class CandidateEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getUsername() {
         return username;
     }
 
-    public void setUsername (String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getEmail() {
+    public @Email(message = "email not valid") String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@Email(message = "email not valid") String email) {
         this.email = email;
     }
 
-    public String getPassword() {
+    public @Length(min = 8, max = 255, message = "password not valid") String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@Length(min = 8, max = 255, message = "password not valid") String password) {
         this.password = password;
     }
 
-    public String getDescription() {
+    public @Length(min = 8, max = 255, message = "description not valid") String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(@Length(min = 8, max = 255, message = "description not valid") String description) {
         this.description = description;
+    }
+
+    public @URL(message = "website should be a valid url") String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(@URL(message = "website should be a valid url") String website) {
+        this.website = website;
     }
 
     public LocalDateTime getCreatedAt() {
